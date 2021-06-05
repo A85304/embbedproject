@@ -1,1 +1,1 @@
-# embbedproject
+# embeddedproject
