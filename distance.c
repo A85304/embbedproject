@@ -1,5 +1,4 @@
-//name:omar hassanien
-// ID:1809513   sec:3  
+
 #include "stdint.h"
 #include "tm4c123gh6.h"
 void SystemInit(){}
