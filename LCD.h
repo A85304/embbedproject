@@ -21,5 +21,5 @@ void LCD_Init(void);
 void LCD_Command(u8 cmd);
 void LCD_Char(u8 data);
 void _delay_ms(u8 mill_sec);
-void LCD_String(u8* String, u8 Index);
+void LCD_String(u8* String, u8 Index,float distance);
 #endif
