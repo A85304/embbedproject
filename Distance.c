@@ -5,7 +5,7 @@
 #define pi 3.14159265358979323846
 
 
-float Total_Distance;
+float Total_Distance = 0;
 double Latitude[2] = {0.0 , 0.0} ;
 double Longitude[2] = {0.0 , 0.0} ;
 int f = 0 ; 
