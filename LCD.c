@@ -91,23 +91,24 @@ void LCD_Init(void)
 void LCD_Command(u8 cmd)
 {
 	
-	GPIO_PORTE_DATA_R = 0x00;
+	GPIO_PORTE_DATA_R &= 0xC7;
 	GPIO_PORTB_DATA_R = cmd;
+	
 	GPIO_PORTE_DATA_R |= 0x20;
 	_delay_ms(10);
-	GPIO_PORTE_DATA_R = 0x00;
+	GPIO_PORTE_DATA_R &= 0xC7;
 }
 
 
 void LCD_Char(u8 data)
 {
 	
-	GPIO_PORTE_DATA_R = 0x08;	
+	GPIO_PORTE_DATA_R &= 0xCF;	
 	GPIO_PORTB_DATA_R = data;
 	
 	GPIO_PORTE_DATA_R |= 0x20;
 	_delay_ms(10);
-	GPIO_PORTE_DATA_R = 0x00;
+	GPIO_PORTE_DATA_R &= 0xC7;
 }
 
 
