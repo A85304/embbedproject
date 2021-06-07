@@ -47,24 +47,24 @@ void LCD_Init(void)
   while ((SYSCTL_PRGPIO_R &0x12)==0);   //wait for clock to be setted
   
   
-  GPIO_PORTB_LOCK_R = 0x4C4F434B;       //unlock GPIO port B
-  GPIO_PORTB_CR_R  |= 0xFF;             //Allow settings for all pins of PORTB
-  GPIO_PORTB_AMSEL_R = 0x00;            //disable analog on (PB0-PB7)
-  GPIO_PORTB_DIR_R = 0xFF;              //PB0-PB7 are used as digital output
-  GPIO_PORTB_PCTL_R = 0x00000000;       //PCTL GPIO on (PB0-PB7)
-  GPIO_PORTB_AFSEL_R = 0x00;            //diable alt funct on (PB0-PB7)
-  GPIO_PORTB_DEN_R = 0xFF;              //Set PORTB as digital pins
-  GPIO_PORTB_DATA_R = 0x00;
+  GPIO_PORTB_LOCK_R   = 0x4C4F434B;     //unlock GPIO port B
+  GPIO_PORTB_CR_R    |= 0xFF;           //Allow settings for all pins of PORTB
+  GPIO_PORTB_AMSEL_R  = 0x00;           //disable analog on (PB0-PB7)
+  GPIO_PORTB_DIR_R    = 0xFF;           //(PB0-PB7)are used as digital output
+  GPIO_PORTB_PCTL_R   = 0x00000000;     //PCTL GPIO on (PB0-PB7)
+  GPIO_PORTB_AFSEL_R  = 0x00;           //diable alt funct on (PB0-PB7)
+  GPIO_PORTB_DEN_R    = 0xFF;           //Set PORTB as digital pins
+  GPIO_PORTB_DATA_R   = 0x00;
   
   
-  GPIO_PORTE_LOCK_R = 0x4C4F434B;       //unlock GPIO port E
-  GPIO_PORTE_CR_R  |= 0x38;             //Allow settings for pins of PORTD (PE3-PE5)
-  GPIO_PORTE_AMSEL_R = 0x00;            //disable analog on (PE3-PE5)
-  GPIO_PORTE_DIR_R = 0x38;              //PD0-PD2 are used as digital output
-  GPIO_PORTE_PCTL_R = 0x00000000;       //PCTL GPIO on (PE3-PE5)
-  GPIO_PORTE_AFSEL_R = 0x00;            //diable alt funct on (PE3-PE5)
-  GPIO_PORTE_DEN_R = 0x38;              //Set PORTD as digital pins (PE3-PE5)
-  GPIO_PORTE_DATA_R = 0x00;
+  GPIO_PORTE_LOCK_R   = 0x4C4F434B;     //unlock GPIO port E
+  GPIO_PORTE_CR_R    |= 0x38;           //Allow settings for pins of PORTE (PE3-PE5)
+  GPIO_PORTE_AMSEL_R &= 0xC7;           //disable analog on (PE3-PE5)
+  GPIO_PORTE_DIR_R   |= 0x38;           //(PE3-PE5) are used as digital output
+  GPIO_PORTE_PCTL_R   = 0x00000000;     //PCTL GPIO on (PE3-PE5)
+  GPIO_PORTE_AFSEL_R &= 0xC7;           //diable alt funct on (PE3-PE5)
+  GPIO_PORTE_DEN_R   |= 0x38;           //Set PORTE as digital pins (PE3-PE5)
+  GPIO_PORTE_DATA_R  &= 0xC7;
   
   LCD_Command(lcd_Clear);               // clear LCD
   _delay_ms(20);
@@ -91,7 +91,7 @@ void LCD_Init(void)
 void LCD_Command(u8 cmd)
 {
 	
-	GPIO_PORTE_DATA_R &= 0xC7;
+	GPIO_PORTE_DATA_R |= 0x00;
 	GPIO_PORTB_DATA_R = cmd;
 	
 	GPIO_PORTE_DATA_R |= 0x20;
@@ -103,7 +103,7 @@ void LCD_Command(u8 cmd)
 void LCD_Char(u8 data)
 {
 	
-	GPIO_PORTE_DATA_R &= 0xCF;	
+	GPIO_PORTE_DATA_R |= 0x08;	
 	GPIO_PORTB_DATA_R = data;
 	
 	GPIO_PORTE_DATA_R |= 0x20;
