@@ -30,7 +30,7 @@ uint8_t *GPS_DATA_RECIVE(void){
 	do{
 	buffer=GPS_GET_LINE();
 		
-	}while((strncmp(buffer,"$GPGLL",6)!=0));     // addresse needed is $GPGLL
+	}while((strncmp(buffer,"$GPGLL",6)!=0)||(buffer[7]==','));     // addresse needed is $GPGLL
 	return buffer;
 }
 
