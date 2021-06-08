@@ -75,7 +75,7 @@ void LCD_Init(void)
   LCD_Command(lcd_FunctionSet8bit);     // transmit 8_bits to LCD
   _delay_ms(15);
   
-  LCD_Command(lcd_Wakeup);              // transmit 8_bits to LCD
+  LCD_Command(lcd_Wakeup);              // Wake up LCD
   _delay_ms(15);
   
   LCD_Command(lcd_EntryMode);           // increment cursor on LCD
