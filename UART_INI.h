@@ -5,5 +5,5 @@
 #include"stdint.h"
 void UART_INI(void);
 uint8_t READ_UART(void);
-void WRITE_UART0(uint8_t);
+void WRITE_UART(uint8_t);
 #endif
