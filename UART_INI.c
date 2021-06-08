@@ -1,12 +1,14 @@
 #include"UART_INI.h"
 //omar moataz
 
+
+
 void UART_INI(void){
-	SYSCTL_RCGCGPIO_R |=0x01;												//activate clk in gpio_A
-	SYSCTL_RCGCUART_R |=0x01;												//activate clk in uart_0
-	while((SYSCTL_PRGPIO_R &(1u))==0);							//wating for activation
+	SYSCTL_RCGCGPIO_R |=0x10;												//activate clk in gpio_E
+	SYSCTL_RCGCUART_R |=0x80;												//activate clk in uart_7
+	while((SYSCTL_PRGPIO_R &(0x10))==0);							//wating for activation
 	GPIO_PORTE_LOCK_R=GPIO_LOCK_KEY;								//unlocking gpio comit register
-	GPIO_PORTE_CR_R|=0x03;													//unlocking bits 0,1 in gpioA
+	GPIO_PORTE_CR_R|=0x03;													//unlocking bits 0,1 in gpioE
 	GPIO_PORTE_AMSEL_R &=~0x03;											//disable analog
 	         
 	GPIO_PORTE_PCTL_R &=~0xFF;											//clearing first two pins function
@@ -35,13 +37,14 @@ uint8_t CHECK_UART_READ_DATA(void){
 }
 
 
-uint8_t READ_UART7(void){
+uint8_t READ_UART(void){
 	while(CHECK_UART_READ_DATA()==0);
 	return((uint8_t)(UART7_DR_R&(0xFF)));
 }
 
-void WRITE_UART7(uint8_t data){
+void WRITE_UART(uint8_t data){
 	while((UART7_FR_R&(1u<<5))!=0);
 	UART7_DR_R=data;
 }
+
 
