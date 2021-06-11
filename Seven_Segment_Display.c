@@ -1,7 +1,13 @@
 #include"Seven_Segment_Display.h"
 
-//This function takes one parameter (the distance) as a float then casted to integer, it displays the distance on the three seven segment displays
+void clear_seven_segment_display(void){
+		GPIO_PORTB_DATA_R &= ~0xFF;		//all Pins of the (units, Tenth, Hundreds) seven segment display will be set to 0
+		GPIO_PORTE_DATA_R &= ~0x3C;
+		GPIO_PORTD_DATA_R &= ~0xCE;		
+		GPIO_PORTA_DATA_R &= ~0xFC;
+}
 
+//This function takes one parameter (the distance) as a float then casted to integer, it displays the distance on the three seven segment displays
 			
 void Seven_Segment_Display(float distance){
 	
