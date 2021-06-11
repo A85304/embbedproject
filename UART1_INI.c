@@ -26,6 +26,19 @@ void UART_INI(void){
 	    
 																		
 	UART7_CTL_R =(UART_CTL_TXE|UART_CTL_RXE|UART_CTL_UARTEN);  //enable transmit and rescieve and enable uart end of config
-	
-	
+}
+uint8_t CHECK_UART_READ_DATA(void){
+	if((UART7_FR_R &(1U<<4))==0)return 1;    //if not empty
+	else return 0;													 //else empty
+}
+
+
+uint8_t READ_UART(void){
+	while(CHECK_UART_READ_DATA()==0);
+	return((uint8_t)(UART7_DR_R&(0xFF)));
+}
+
+void WRITE_UART(uint8_t data){
+	while((UART7_FR_R&(1u<<5))!=0);
+	UART7_DR_R=data;
 }
