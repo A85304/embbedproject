@@ -71,6 +71,10 @@ void SystemInit(){}
 		
 		
 		else if(Global_falg==1){//when program is paused
+			LCD_Command(lcd_SetCursor_1);
+			_delay_ms(2);
+			LCD_String("Paused_AtDis:",13,Total_Distance);
+			_delay_ms(2);
 			f=0;
 		}
 	}
