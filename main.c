@@ -23,7 +23,7 @@ void SystemInit(){}
 		////////////////////////////////////////
 		//variables 
 		uint8_t *buffer;//gets data from gps
-
+		int fraction;
 		
 		
 		
@@ -51,9 +51,14 @@ void SystemInit(){}
 			
 			
 			//printing distance
+			fraction=(int)Total_Distance;
+			fraction=(Total_Distance-fraction)*1000;
+			
 			LCD_Command(lcd_SetCursor_1);
 			_delay_ms(2);
 			LCD_String("Distance:",9,Total_Distance);
+			_delay_ms(2);
+			LCD_String(".",1,fraction);
 			_delay_ms(255);
 			
 			
