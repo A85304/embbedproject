@@ -111,9 +111,12 @@ void LCD_Char(u8 data)
 	GPIO_PORTE_DATA_R &= 0xC7;
 }
 
-
+void LCD_String(u8* String, u8 Index,float distance)
 {
-
+	int dis=(int)distance;
+	int Units = (dis % 10);	
+	int Tenth = (dis % 100)/10;
+	int Hundereds = (dis % 1000)/100;
 	u8 iteration=0;
 
 	for (iteration=0; iteration< Index ; iteration++)
@@ -126,7 +129,12 @@ void LCD_Char(u8 data)
 	}
 	
 	/////////////////////////
-
+	LCD_Char(Hundereds+'0');
+	_delay_ms(10);
+	LCD_Char(Tenth+'0');
+	_delay_ms(10);
+	LCD_Char(Units+'0');
+	_delay_ms(10);
 
 
 }
