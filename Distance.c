@@ -57,8 +57,15 @@ void Distance( double Lat ,  double Long) {
 
 
 	void Gps_Reading(char *Gps_String){
-
+		
          char *Gps_recieve = Gps_String ;
+	 int j;
+         char parss[82]={"0"};
+	 for(j=0 ; j<82 ; j++){
+					 
+		 parss[j]=Gps_String[j];
+					 
+		 }
          char Points = sscanf_s(Gps_recieve, " %*c %*c %*c %*c %*c %*c %*c  %lf %*c %*c %*c %lf ",  &Lat1 , &Long1);
 
         
